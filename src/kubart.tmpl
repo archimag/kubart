@@ -1,0 +1,44 @@
+// -*- closure-template-html -*-
+// kubart.tmpl
+
+{namespace kubart.view}
+
+{template baseFrame}
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>{$title}</title>
+            <link rel="stylesheet" href="/static/css/style.css" text="text/css">
+        </head>
+
+        <body>
+            <div id="header">
+                <a href="/" title="Стихи Марии Петелиной">Стихи Марии Петелиной</a>
+            </div>
+
+            <div id="content">
+                {$content |noAutoescape}
+            </div>
+
+            <div id="footer">
+                @2011 Мария Петелина
+            </div>
+        </body>
+    </html>
+{/template}
+
+{template poemPage}
+    {call baseFrame}
+        {param title: $title /}
+        {param content}
+            <div id="poem">
+                <h1>{$title}</h1>
+                
+                {foreach $line in $poem}
+                    <span>{$line}</span>
+                    {if not isLast($line)}<br />{/if}
+                {/foreach}
+            </div>
+        {/param}
+    {/call}
+{/template}

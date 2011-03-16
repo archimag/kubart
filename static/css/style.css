@@ -1,0 +1,9 @@
+/* style.css */
+
+body { font-family: 'Palatino', 'Palatino Linotype', 'Georgia', serif; color: #333;}
+
+#poem { margin: 2em 2em; font-size: 1.2em; }
+#poem h1 { font-size: 1.5em; }
+
+#footer { font-size: 0.8em; color: gray; text-align: center; }
+
