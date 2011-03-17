@@ -5,4 +5,5 @@
   :components ((:module "src"
                         :components
                         ((:file "defmodule")
-                         (:file "kubart" :depends-on ("defmodule"))))))
+                         (:file "poems" :depends-on ("defmodule"))
+                         (:file "kubart" :depends-on ("poems"))))))

@@ -42,3 +42,47 @@
         {/param}
     {/call}
 {/template}
+
+{template showPoemList}
+    <ul>
+        {foreach $poem in $poems}
+            <li>
+                <a href="{$poem.href}">{$poem.name}</a>
+            </li>
+        {/foreach}
+    </ul>
+{/template}
+
+{template categoryPage}
+    {call baseFrame}
+        {param title: $title or 'Стихи Марии Петелиной' /}
+
+        {param content}
+            {if $poems}
+                {call showPoemList}
+                    {param poems: $poems /}
+                {/call}
+            {/if}
+    
+            <ul>
+                {foreach $category in $categories}
+                    <li>
+                        {if $category.name}
+                            {if $category.href}
+                                <a href="{$category.href}" class="category">{$category.name}</a>
+                            {else}
+                                <span class="category" >{$category.name}</span>
+                            {/if}
+                        {/if}
+
+                        {if $category.poems}
+                            {call showPoemList}
+                                {param poems: $category.poems /}
+                            {/call}
+                        {/if}
+                    </li>
+                {/foreach}
+            </ul>
+        {/param}
+    {/call}
+{/template}

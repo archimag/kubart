@@ -3,28 +3,11 @@
 (in-package #:kubart)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; drawer
+;;;; poems
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defclass poem-drawer () ())
-
-(defmethod restas:render-object ((drawer poem-drawer) (poem pathname))
-  (setf (hunchentoot:content-type*) "text/html; charset=utf-8")
-  (kubart.view:poem-page
-   (list :title (pathname-name poem)
-         :poem (iter (for line in-file poem using #'read-line)
-                     (collect line)))))
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; publish
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(restas:mount-submodule -poems- (#:restas.directory-publisher)
-  (restas.directory-publisher:*default-render-method* (make-instance 'poem-drawer))
-  (restas.directory-publisher:*autoindex* t))
+(restas:mount-submodule -poems- (#:kubart.poems)
+  (kubart.poems:*default-render-method* (make-instance 'kubart.poems::poem-drawer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; static
